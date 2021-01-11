@@ -18,7 +18,7 @@ exports.news_create = function (req, res, next) {
       return next(err);
     }
 
-    res.render("news/add", {
+    res.render("layouts/mainLayout", {
       viewTitle: "Thêm tin tức",
     });
   });
