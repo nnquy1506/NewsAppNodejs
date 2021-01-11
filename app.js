@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const news = require("./routes/News_router");
 const app = express();
-
+const exphbs = require("express-handlebars");
+const path = require("path");
 
 const PORT = process.env.PORT || 1234;
 
@@ -24,9 +25,20 @@ mongoose
     process.exit();
   });
 
-  app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({extended: false}));
-  app.use("/api", news);
-  app.listen(PORT, () => {
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.set("views", path.join(__dirname, "/views/"));
+app.engine(
+  "hbs",
+  exphbs({
+    extname: "hbs",
+    defaultLayout: "mainLayout",
+    layoutsDir: __dirname + "/views/layouts/",
+  })
+);
+app.set("view engine", "hbs");
+
+app.use("/api", news);
+app.listen(PORT, () => {
   console.log(`App is running on port ${PORT}.`);
 });

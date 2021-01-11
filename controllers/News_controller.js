@@ -2,12 +2,13 @@ const News = require("../models/News_model");
 
 //Simple version, without validation or sanitation
 
-exports.news_create = function (req, res) {
+exports.news_create = function (req, res, next) {
   let news = new News({
     title: req.body.title,
     content: req.body.content,
     category: req.body.category,
     featured: req.body.featured,
+    breakingNews: req.body.breakingNews,
     desc: req.body.desc,
     thumbnail: req.body.thumbnail,
   });
@@ -16,7 +17,10 @@ exports.news_create = function (req, res) {
     if (err) {
       return next(err);
     }
-    res.send("News Created successfully");
+
+    res.render("news/add", {
+      viewTitle: "Thêm tin tức",
+    });
   });
 };
 
@@ -47,11 +51,11 @@ exports.news_delete = function (req, res) {
 
 exports.getAllNews = function (req, res) {
   const col = "_id title content category featured desc thumbnail video ";
-  News.find({}, col, (err, news) => {
+  News.find({}, col, { sort: { _id: 1 } }, (err, news) => {
     if (err) {
       return res.json({ err });
     }
-    res.json({ success: true, news });
+    res.json({ success: true, news: news.sort((a, b) => b._id + a._id) });
   });
 };
 
@@ -68,7 +72,7 @@ exports.getNewsByCategory = function (req, res) {
 
 exports.searchPosts = function (req, res) {
   const { query } = req.params;
-  News.find({}, function (err, news) {
+  News.find({}, null, { sort: { _id: -1 } }, function (err, news) {
     if (news) {
       const data = news.filter((news) =>
         news.title.toLowerCase().includes(query.trim().toLowerCase())

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thêm tin tức</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.ckeditor.com/4.15.1/standard/ckeditor.js"></script>
+</head>
+
+<body class="bg-info">
+    <div class="row">
+        <div class="col-md-6 offset-md-3" style="background-color: #fff; margin-top: 25px;padding: 20px;">
+            <h3>{{viewTitle}}</h3>
+
+            <form action="/api/create" method="POST">
+                <div class="form-group">
+                    <label for="title">Tiêu đề</label>
+                    <input type="text" name="title" id="title" class="form-control" placeholder="Nhập tiêu đề">
+                </div>
+                <div class="form-group">
+                    <label for="desc">Mô tả</label>
+                    <input type="text" name="desc" id="desc" class="form-control" placeholder="Mô tả bài báo">
+                </div>
+                <div class="form-group">
+                    <label for="content">Nội dung</label>
+                    <textarea class="form-control" name="content" id="content"></textarea>
+                    <script>
+                        CKEDITOR.replace('content');
+                    </script>
+                </div>
+                <div class="form-group">
+                    <label for="thumbnail">Ảnh đại diện</label>
+                    <input type="text" name="thumbnail" id="thumbnail" class="form-control"
+                        placeholder="Link ảnh đại diện">
+                </div>
+                <div class="form-group">
+                    <label for="category">Danh mục</label>
+                    <select class="form-control" name="category" id="category">
+                        <option value="0">Category <sup>*</sup></option>
+                        <option value="thể thao">Thể thao</option>
+                        <option value="công nghệ">Công nghệ</option>
+                        <option value="chính trị">Chính trị</option>
+                        <option value="giải trí">Giải trí</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="featured">Tin nổi bật</label>
+                    <select class="form-control" name="featured" id="featured">
+                        <option value="0">Không <sup>*</sup></option>
+                        <option value="on">Có</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="breakingNews">Tin nóng</label>
+                    <select class="form-control" name="breakingNews" id="breakingNews">
+                        <option value="0">Không <sup>*</sup></option>
+                        <option value="on">Có</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Thêm tin tức</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+    <scrip src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </scrip>
+    <scrip src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </scrip>
+    <scrip src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </scrip>
+</body>
+
+</html>
