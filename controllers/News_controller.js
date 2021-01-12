@@ -50,8 +50,8 @@ exports.news_delete = function (req, res) {
 };
 
 exports.getAllNews = function (req, res) {
-  const col = "_id title content category featured desc thumbnail video ";
-  News.find({}, col, { sort: { _id: 1 } }, (err, news) => {
+  const col = "_id title content category breakingNews featured desc thumbnail video ";
+  News.find({}, col, { sort: { _id: -1 } }, (err, news) => {
     if (err) {
       return res.json({ err });
     }
